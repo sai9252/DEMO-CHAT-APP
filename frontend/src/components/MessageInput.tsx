@@ -41,6 +41,8 @@ const MessageInput = () => {
 
         if (isSending) return;
         setIsSending(true);
+        setText("");
+        setImagePreview(null);
 
         try {
             await sendMessage({
@@ -48,8 +50,6 @@ const MessageInput = () => {
                 image: imagePreview,
             });
 
-            setText("");
-            setImagePreview(null);
             if (fileInputRef.current) fileInputRef.current.value = "";
         } catch (error) {
             console.error("Failed to send message:", error);
