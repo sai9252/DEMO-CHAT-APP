@@ -51,7 +51,7 @@ const ChatContainer = () => {
                 {messages.map((message:any, index:any) => (
                     <div
                         key={message._id}
-                        className={`chat ${message.senderId === authUser._id ? "chat-end" : "chat-start"}`}
+                        className={`chat ${message.senderId === authUser._id ? "chat-end " : "chat-start"}`}
                         ref={index === messages.length - 1 ? messageEndRef : null} // Apply ref only to the last message
                     >
                         <div className=" chat-image avatar">
@@ -71,7 +71,8 @@ const ChatContainer = () => {
                                 {formatMessageTime(message.createdAt)}
                             </time>
                         </div>
-                        <div className="chat-bubble flex flex-col">
+                        <div className={`chat-bubble flex flex-col
+                            ${message.senderId === authUser._id ? "bg-primary text-primary-content" : "bg-base-200"} `}>
                             {message.image && (
                                 <img
                                     src={message.image}

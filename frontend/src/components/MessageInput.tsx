@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import { useChatStore } from "../store/useChatStore";
 import { Image, Send, X } from "lucide-react";
 import toast from "react-hot-toast";
+import { useThemeStore } from "../store/useThemeStore";
 
 const MessageInput = () => {
     const [text, setText] = useState("");
@@ -9,6 +10,7 @@ const MessageInput = () => {
     const fileInputRef = useRef<HTMLInputElement | null>(null);
     const { sendMessage }: any = useChatStore();
     const [isSending, setIsSending] = useState(false);
+    const {theme}:any = useThemeStore();
 
     const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
@@ -100,21 +102,24 @@ const MessageInput = () => {
                     <button
                         type="button"
                         title="button"
-                        className={`hidden sm:flex btn btn-circle
+                        className={`hidden sm:flex btn btn-circle border hover:border-primary
                         ${imagePreview ? "text-emerald-500" : "text-zinc-400"}`}
                         onClick={() => fileInputRef.current?.click()}
                     >
                         <Image size={20} />
                     </button>
                 </div>
+                <div className="">
                 <button
                     title="submit"
                     type="submit"
-                    className="btn btn-sm btn-circle"
+                    data-theme={theme}
+                    className="btn btn-sm btn-primary "
                     disabled={isSending || (!text.trim() && !imagePreview)}
                 >
                     <Send size={22} />
                 </button>
+                </div>
             </form>
         </div>
     );
