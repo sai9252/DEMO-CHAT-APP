@@ -12,7 +12,6 @@ interface AuthUser {
     // Add other properties of the auth user here
     fullName: string;
     email: string;
-    // Add other fields as necessary
 }
 
 // Define the type for the store
